@@ -1,3 +1,5 @@
+// Run this file AFTER starting the server in NewBankServer.java
+
 package newbank.client;
 
 import java.io.BufferedReader;
@@ -52,6 +54,7 @@ public class ExampleClient extends Thread{
 	}
 	
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
+				
 		new ExampleClient("localhost",14002).start();
 	}
 }
