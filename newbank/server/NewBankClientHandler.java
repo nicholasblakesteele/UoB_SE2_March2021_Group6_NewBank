@@ -1,4 +1,4 @@
-package newbank.server;
+package NewBank.newbank.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,8 +33,12 @@ public class NewBankClientHandler extends Thread{
 			CustomerID customer = bank.checkLogInDetails(userName, password);
 			// if the user is authenticated then get requests from the user and process them 
 			if(customer != null) {
-				out.println("Log In Successful. What do you want to do?");
+				out.println("Log In Successful");
 				while(true) {
+					out.println("---------------");
+				 	out.println("What do you want to do?" +
+					"\nPress 1 to view your account" +
+					"\nPress 2 to deposit/withdraw/transfer/move --NOT YET IMPLEMENTED--");
 					String request = in.readLine();
 					System.out.println("Request from " + customer.getKey());
 					String responce = bank.processRequest(customer, request);
