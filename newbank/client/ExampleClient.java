@@ -40,6 +40,9 @@ public class ExampleClient extends Thread{
 
 
 	public void run() {
+
+		System.out.println("ExampleClient: run()");
+
 		while(true) {
 			try {
 				while(true) {
