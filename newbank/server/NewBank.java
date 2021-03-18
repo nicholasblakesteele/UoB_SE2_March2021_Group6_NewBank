@@ -1,27 +1,29 @@
+// NBS group branch change
+
 package NewBank.newbank.server;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class NewBank {
-	
+
 	private static final NewBank bank = new NewBank();
 	private HashMap<String,Customer> customers;
-	
+
 	private NewBank() {
 		customers = new HashMap<>();
 		addTestData();
 	}
-	
+
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Main", 1000.0));
 		customers.put("Bhagy", bhagy);
-		
+
 		Customer christina = new Customer();
 		christina.addAccount(new Account("Savings", 1500.0));
 		customers.put("Christina", christina);
-		
+
 		Customer john = new Customer();
 		john.addAccount(new Account("Checking", 250.0));
 		customers.put("John", john);
@@ -33,7 +35,7 @@ public class NewBank {
 		tempCustomer.addAccount(new Account("Savings", 999.99));
 		customers.put("tempCustomer", tempCustomer);
 	}
-	
+
 	public static NewBank getBank() {
 		return bank;
 	}
@@ -58,7 +60,7 @@ public class NewBank {
 		}
 		return "Account does not exist"; //if getKey() fails ?
 	}
-	
+
 	private String showMyAccounts(CustomerID customer) {
 		return (customers.get(customer.getKey())).accountsToString();
 	}
