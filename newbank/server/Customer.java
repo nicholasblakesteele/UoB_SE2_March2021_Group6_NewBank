@@ -1,4 +1,4 @@
-package newbank.server;
+package NewBank.newbank.server;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class Customer {
 	public String accountsToString() {
 		String s = "";
 		for(Account a : accounts) {
-			s += a.toString();
+			s += a.toString() + "\n"; //each string item prints on a new line
 		}
 		return s;
 	}
@@ -21,4 +21,5 @@ public class Customer {
 	public void addAccount(Account account) {
 		accounts.add(account);		
 	}
+
 }
