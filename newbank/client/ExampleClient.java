@@ -20,17 +20,19 @@ public class ExampleClient extends Thread{
 	private Thread bankServerResponceThread;
 
 	public ExampleClient(String ip, int port) throws UnknownHostException, IOException {
+
 		server = new Socket(ip,port);
 		userInput = new BufferedReader(new InputStreamReader(System.in));
 		bankServerOut = new PrintWriter(server.getOutputStream(), true);
 
 		bankServerResponceThread = new Thread() {
+
 			private BufferedReader bankServerIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			public void run() {
 				try {
 					while(true) {
-						String responce = bankServerIn.readLine();
-						System.out.println(responce);
+						String response = bankServerIn.readLine();
+						System.out.println(response);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -68,10 +70,6 @@ public class ExampleClient extends Thread{
 		System.out.println("=========================================================");
 		System.out.println("Welcome to the Group 6 Bank - YOUR international bank!");
 		System.out.println("=========================================================");
-		System.out.println("\n");
-
-		System.out.println("Please enter your login details to continue");
-		System.out.println("\n");
-
+		System.out.println("Please login to continue");
 	}
 }
