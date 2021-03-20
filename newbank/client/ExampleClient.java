@@ -3,7 +3,7 @@
 //3/18/21 push test Nina J. -- to delete later!
 // Hello I'm announcing this is my branch now
 
-package NewBank.newbank.client;
+package newbank.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,10 +41,9 @@ public class ExampleClient extends Thread{
 		bankServerResponceThread.start();
 	}
 
-
 	public void run() {
 
-		System.out.println("ExampleClient: run()");
+		printClientWelcomeMessage();
 
 		while(true) {
 			try {
@@ -61,5 +60,18 @@ public class ExampleClient extends Thread{
 
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
 		new ExampleClient("localhost",14002).start();
+	}
+
+	private void printClientWelcomeMessage() {
+
+		System.out.println("\n");
+		System.out.println("=========================================================");
+		System.out.println("Welcome to the Group 6 Bank - YOUR international bank!");
+		System.out.println("=========================================================");
+		System.out.println("\n");
+
+		System.out.println("Please enter your login details to continue");
+		System.out.println("\n");
+
 	}
 }

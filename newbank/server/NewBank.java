@@ -1,6 +1,6 @@
 // NBS group branch change
 
-package NewBank.newbank.server;
+package newbank.server;
 
 import java.util.HashMap;
 import java.util.Scanner;
