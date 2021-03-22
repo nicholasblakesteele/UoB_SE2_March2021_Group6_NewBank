@@ -1,4 +1,6 @@
-package NewBank.newbank.server;
+// Run this file first to start the Bank Server, then run ExampleClient.java
+
+package newbank.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
