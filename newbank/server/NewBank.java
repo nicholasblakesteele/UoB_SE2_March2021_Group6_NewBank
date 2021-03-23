@@ -9,9 +9,20 @@ public class NewBank {
 
 	private static final NewBank bank = new NewBank();
 	private HashMap<String,Customer> customers;
+	private HashMap<String,String> passwords;
+
+	public HashMap<String, Customer> getCustomersMap(){
+		return customers;
+	}
+
+	public HashMap<String, String> getPasswordsMap() {
+		return passwords;
+	}
+
 
 	private NewBank() {
 		customers = new HashMap<>();
+		passwords = new HashMap<>();
 		addTestData();
 	}
 
@@ -28,16 +39,32 @@ public class NewBank {
 		john.addAccount(new Account("Checking", 250.0));
 		customers.put("John", john);
 
-		//For showMyAccounts() testing purposes -- can be deleted later
-		Customer tempCustomer = new Customer();
-		tempCustomer.addAccount(new Account("Main", 9999.99));
-		tempCustomer.addAccount(new Account("Checking", 9000.00));
-		tempCustomer.addAccount(new Account("Savings", 999.99));
-		customers.put("tempCustomer", tempCustomer);
 	}
 
 	public static NewBank getBank() {
 		return bank;
+	}
+
+	public synchronized boolean validateID(String userID){
+		if(customers.containsKey(userID) ){
+			return true;
+		}
+		return false;
+	}
+
+	public synchronized void addNewCustomer(String UserId, String password, Account newA){
+		Customer newC = new Customer();
+		newC.addAccount(newA);
+		customers.put(UserId, newC);
+		passwords.put(UserId, password);
+	}
+
+	public synchronized boolean checkPassword(String password) {
+		if (password.length() < 7)
+			return true;
+		else {
+			return false;
+		}
 	}
 
 	//Rebecca's card - to be implemented. For now it does not check for Login.
