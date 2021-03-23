@@ -41,11 +41,11 @@ public class ExampleClient extends Thread{
 			}
 		};
 		bankServerResponceThread.start();
+		// Changed position of printClientWelcomeMessage() to expected UI display order
+		printClientWelcomeMessage();
 	}
 
 	public void run() {
-
-		printClientWelcomeMessage();
 
 		while(true) {
 			try {
