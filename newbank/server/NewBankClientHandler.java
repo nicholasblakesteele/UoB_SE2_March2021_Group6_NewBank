@@ -39,7 +39,7 @@ public class NewBankClientHandler extends Thread {
 		try {
 	    // ask for user name
 	    String newline = System.getProperty("line.separator");
-	    out.println("Would you like to register or login, type number accordingly" + newline + "1.register" + newline + "2.login");
+	    out.println("Would you like to register or login, type number accordingly" + newline + "1. Register" + newline + "2. Login");
 	    String options = in.readLine();
 
 			if (options.equals("1")) {
@@ -53,8 +53,10 @@ public class NewBankClientHandler extends Thread {
 				existingAccountLogin();
 			}
 
-		}
+		} catch(IOException e) {
 
+			e.printStackTrace();
+		}
 	}
 
 	private void existingAccountLogin() {
@@ -147,31 +149,54 @@ public class NewBankClientHandler extends Thread {
 
 			if (bank.validateID(userID) == true) {
 				out.println("Sorry this username is taken, please try again");
+
+				newAccountRegister(); // Need to loop back again if error
+
 			} else {
 
-				out.println("Please enter a valid password");
-				String password = in.readLine();
-				//for (int i = 0; bank.checkPassword(password); i++)//need to loop this functon back to ask for valid password again
-				while(bank.checkPassword(password) == true) {
-					out.println("Password too short, must be more than 7 characters");
-				//	i++;
+				//out.println("Please enter a valid password");
+				// String password = in.readLine();
+
+				Boolean passwordPass = false;
+				String password = null;
+
+				while (passwordPass == false) {
+
+					if (password != null) {
+
+						out.println("Password too short, must be more than 7 characters");
+					}
+
+					out.println("Please enter a valid password containing 7 or more characters");
+
+					password = in.readLine();
+
+					passwordPass = bank.checkPassword(password);
 				}
 
 
-				out.println("Please enter a Account type");
-				String AccType = in.readLine();
+				out.println("Please enter account name");
+				String accountName = in.readLine();
 
-				out.println("Please enter a Deposit amount");
+				out.println("Please enter initial deposit");
 				String DepositValue = in.readLine();
 				double value = Double.parseDouble(DepositValue);
-				Account newA = new Account(AccType, value);
+
+				Account newA = new Account(accountName, value);
 				bank.addNewCustomer(userID, password, newA);
-				out.println("Success");
-				//    cutomers.put(userID, Customer);
+
+				// Note currently new Account() will only create an account in memory
+
+				out.println("Customer account and opening balance created. Please login.");
+
+				// Now offer to login
+
+				existingAccountLogin();
+
 			}
-		}
-		catch (IOException r)
-		{
+
+		} catch (IOException r) {
+
 			System.out.println(r);
 		}
 	}

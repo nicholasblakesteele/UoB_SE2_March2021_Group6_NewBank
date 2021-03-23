@@ -60,7 +60,7 @@ public class NewBank {
 	}
 
 	public synchronized boolean checkPassword(String password) {
-		if (password.length() < 7)
+		if (password.length() > 7)
 			return true;
 		else {
 			return false;

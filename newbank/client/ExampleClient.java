@@ -48,6 +48,7 @@ public class ExampleClient extends Thread{
 	public void run() {
 
 		while(true) {
+
 			try {
 				while(true) {
 					String command = userInput.readLine();
@@ -70,6 +71,6 @@ public class ExampleClient extends Thread{
 		System.out.println("=========================================================");
 		System.out.println("Welcome to the Group 6 Bank - YOUR international bank!");
 		System.out.println("=========================================================");
-		System.out.println("Please login to continue");
+		System.out.println("\n");
 	}
 }
