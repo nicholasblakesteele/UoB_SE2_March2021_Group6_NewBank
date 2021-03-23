@@ -1,6 +1,6 @@
 // NBS group branch change
 
-package NewBank.newbank.server;
+package newbank.server;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -52,16 +52,41 @@ public class NewBank {
 
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
+
 		if (customers.containsKey(customer.getKey())) {
+
 			switch(request) {
-			case "1" : return showMyAccounts(customer);
-			default : return "Invalid Input. Please try again.";
+
+				case "1" :
+					// List your accounts
+					return showMyAccounts(customer);
+
+				case "2" :
+					// Create a new account
+					return "CreateNewAccount Feature Incomplete";
+
+				case "3" :
+					// Transfer money between your accounts
+					return "TransferMoney Feature Incomplete";
+
+				case "4" :
+					// Send money to another person
+					return "SendMoney Feature Incomplete";
+
+				case "5" :
+					// Logout
+					return "Logout Feature Incomplete";
+
+				default :
+					return "Invalid option. Please try again.";
 			}
 		}
+
 		return "Account does not exist"; //if getKey() fails ?
 	}
 
 	private String showMyAccounts(CustomerID customer) {
+
 		return (customers.get(customer.getKey())).accountsToString();
 	}
 

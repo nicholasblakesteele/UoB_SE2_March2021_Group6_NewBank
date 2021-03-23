@@ -3,7 +3,7 @@
 //3/18/21 push test Nina J. -- to delete later!
 // Hello I'm announcing this is my branch now
 
-package NewBank.newbank.client;
+package newbank.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,17 +20,19 @@ public class ExampleClient extends Thread{
 	private Thread bankServerResponceThread;
 
 	public ExampleClient(String ip, int port) throws UnknownHostException, IOException {
+
 		server = new Socket(ip,port);
 		userInput = new BufferedReader(new InputStreamReader(System.in));
 		bankServerOut = new PrintWriter(server.getOutputStream(), true);
 
 		bankServerResponceThread = new Thread() {
+
 			private BufferedReader bankServerIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			public void run() {
 				try {
 					while(true) {
-						String responce = bankServerIn.readLine();
-						System.out.println(responce);
+						String response = bankServerIn.readLine();
+						System.out.println(response);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -39,12 +41,11 @@ public class ExampleClient extends Thread{
 			}
 		};
 		bankServerResponceThread.start();
+		// Changed position of printClientWelcomeMessage() to expected UI display order
+		printClientWelcomeMessage();
 	}
 
-
 	public void run() {
-
-		System.out.println("ExampleClient: run()");
 
 		while(true) {
 			try {
@@ -61,5 +62,14 @@ public class ExampleClient extends Thread{
 
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
 		new ExampleClient("localhost",14002).start();
+	}
+
+	private void printClientWelcomeMessage() {
+
+		System.out.println("\n");
+		System.out.println("=========================================================");
+		System.out.println("Welcome to the Group 6 Bank - YOUR international bank!");
+		System.out.println("=========================================================");
+		System.out.println("Please login to continue");
 	}
 }
