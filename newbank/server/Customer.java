@@ -11,10 +11,15 @@ public class Customer {
 	}
 	
 	public String accountsToString() {
-		String s = "";
+		String space = " ";
+		int spaceCount = 0;
+		String s = " ╭────────────────────── Accounts ───────────────────────╮\n";
 		for(Account a : accounts) {
-			s += a.toString() + "\n"; //each string item prints on a new line
+			//each string item prints on a new line
+			spaceCount = 52 - a.toString().length();
+			s +=  " │ " + a.toString() + " £" + space.repeat(spaceCount) + "│\n";
 		}
+		s += " ╰───────────────────────────────────────────────────────╯";
 		return s;
 	}
 

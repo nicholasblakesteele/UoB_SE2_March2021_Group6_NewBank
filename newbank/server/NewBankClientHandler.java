@@ -21,13 +21,15 @@ public class NewBankClientHandler extends Thread {
 
 	private void printClientMajorHelpCommands() {
 
-		out.println("\n---------------------------------------------------------");
-		out.println("What do you want to do today?");
-		out.println("Press 1 to list your accounts");
-		out.println("Press 2 to create a new account");
-		out.println("Press 3 to transfer money between your accounts");
-		out.println("Press 4 to send money to another person");
-		out.println("Press 5 to logout");
+		out.println();
+		out.println(" ╭────────────────────── Main Menu ──────────────────────╮");
+		out.println(" │ What would you like to do today?                      │");
+		out.println(" │ Press 1 to list your accounts                         │");
+		out.println(" │ Press 2 to create a new account                       │");
+		out.println(" │ Press 3 to transfer money between your accounts       │");
+		out.println(" │ Press 4 to send money to another person               │");
+		out.println(" │ Press 5 to logout                                     │");
+		out.println(" ╰───────────────────────────────────────────────────────╯");
 		out.println("\nEnter option: "); // Note use of print to enter command on same line
 
 	}
@@ -142,7 +144,7 @@ public class NewBankClientHandler extends Thread {
 	private void newAccountRegister(){
 
 		try {
-			out.println("Please enter a username you would like to use");
+			out.println("Please enter your desired username");
 			String userID = in.readLine();
 
 			//for loop to loop back round if username is take and need to ask again
