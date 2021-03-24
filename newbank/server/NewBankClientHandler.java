@@ -144,7 +144,7 @@ public class NewBankClientHandler extends Thread {
 	}
 
 	private void pauseUI(){
-		out.println("\nPress any key to continue...");
+		out.println("\nPress Enter to continue...");
 		try
 		{
 			in.read();
