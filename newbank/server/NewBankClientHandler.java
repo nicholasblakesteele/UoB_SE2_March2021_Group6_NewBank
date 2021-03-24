@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class NewBankClientHandler extends Thread {
 
@@ -118,6 +119,7 @@ public class NewBankClientHandler extends Thread {
 					}
 
 					out.println(response);
+					pauseUI();
 
 				}
 
@@ -139,6 +141,16 @@ public class NewBankClientHandler extends Thread {
 			}
 		}
 
+	}
+
+	private void pauseUI(){
+		out.println("\nPress any key to continue...");
+		try
+		{
+			in.read();
+		}
+		catch(Exception e)
+		{}
 	}
 
 	private void newAccountRegister(){
