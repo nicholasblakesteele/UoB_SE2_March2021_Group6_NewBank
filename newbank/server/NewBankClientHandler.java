@@ -27,7 +27,8 @@ public class NewBankClientHandler extends Thread {
 		out.println("Press 2 to create a new account");
 		out.println("Press 3 to transfer money between your accounts");
 		out.println("Press 4 to send money to another person");
-		out.println("Press 5 to logout");
+		out.println("Press 5 to request a microloan");
+		out.println("Press 6 to logout");
 		out.println("\nEnter option: "); // Note use of print to enter command on same line
 
 	}
@@ -78,14 +79,14 @@ public class NewBankClientHandler extends Thread {
 
 				out.println("Log In Successful for: " + customer.getKey());
 
-				while(true) {
+				while (true) {
 
 					printClientMajorHelpCommands();
 
 					String request = in.readLine();
 					out.println("\nProcessing request for customer: " + customer.getKey());
 
-					String response = bank.processRequest(customer, request);
+					String response = bank.processRequest(in, out, customer, request);
 
 					// Print status of request
 
@@ -107,7 +108,11 @@ public class NewBankClientHandler extends Thread {
 							// Send money to another person
 							// out.println("UI message");
 
-						case "5" :
+						case "5":
+							// Apply for microloan
+							// out.println("UI message");
+
+						case "6" :
 							// Logout
 							// out.println("UI message");
 
@@ -139,7 +144,8 @@ public class NewBankClientHandler extends Thread {
 
 	}
 
-	private void newAccountRegister(){
+
+	private void newAccountRegister() {
 
 		try {
 			out.println("Please enter a username you would like to use");
