@@ -96,7 +96,7 @@ public class NewBankClientHandler extends Thread {
 
 						case "1" :
 							// List your accounts
-							out.println("Retrieving accounts...");
+							out.println("Retrieving accounts...\n");
 
 						case "2" :
 							// Create a new account
@@ -178,7 +178,7 @@ public class NewBankClientHandler extends Thread {
 
 					if (password != null) {
 
-						out.println("Password too short, must be more than 7 characters");
+						out.println("Password too short, must be 7  or more characters");
 					}
 
 					out.println("Please enter a valid password containing 7 or more characters");
