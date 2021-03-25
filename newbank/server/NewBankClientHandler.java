@@ -81,14 +81,14 @@ public class NewBankClientHandler extends Thread {
 
 				out.println("Log In Successful for: " + customer.getKey());
 
-				while(true) {
+				while (true) {
 
 					printClientMajorHelpCommands();
 
 					String request = in.readLine();
 					out.println("\nProcessing request for customer: " + customer.getKey());
 
-					String response = bank.processRequest(customer, request);
+					String response = bank.processRequest(in, out, customer, request);
 
 					// Print status of request
 
@@ -110,7 +110,11 @@ public class NewBankClientHandler extends Thread {
 							// Send money to another person
 							// out.println("UI message");
 
-						case "5" :
+						case "5":
+							// Apply for microloan
+							// out.println("UI message");
+
+						case "6" :
 							// Logout
 							// out.println("UI message");
 
@@ -142,7 +146,7 @@ public class NewBankClientHandler extends Thread {
 		}
 
 	}
-
+	
 	private void pauseUI(){
 		out.println("\nPress Enter to continue...");
 		try

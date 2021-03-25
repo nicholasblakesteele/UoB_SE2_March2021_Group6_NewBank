@@ -2,6 +2,10 @@
 
 package newbank.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -18,7 +22,6 @@ public class NewBank {
 	public HashMap<String, String> getPasswordsMap() {
 		return passwords;
 	}
-
 
 	private NewBank() {
 		customers = new HashMap<>();
@@ -76,9 +79,11 @@ public class NewBank {
 		return new CustomerID(userName);
 	}
 
-
+	// ------------------------------
 	// commands from the NewBank customer are processed in this method
-	public synchronized String processRequest(CustomerID customer, String request) {
+	// ------------------------------
+
+	public synchronized String processRequest(BufferedReader in, PrintWriter out, CustomerID customer, String request) {
 
 		if (customers.containsKey(customer.getKey())) {
 
@@ -101,6 +106,11 @@ public class NewBank {
 					return "SendMoney Feature Incomplete";
 
 				case "5" :
+					// Microloan request
+					requestMicroloan(in, out);
+					return "Thank you for using our micro loan service";
+
+				case "6" :
 					// Logout
 					return "Logout Feature Incomplete";
 
@@ -112,9 +122,55 @@ public class NewBank {
 		return "Account does not exist"; //if getKey() fails ?
 	}
 
+
 	private String showMyAccounts(CustomerID customer) {
 
 		return (customers.get(customer.getKey())).accountsToString();
+	}
+
+
+	private void requestMicroloan(BufferedReader in, PrintWriter out) {
+
+		out.println("Requesting microloan...");
+
+		try {
+
+			out.println("How much would you like to borrow? (Min: £100. Max £10,000)");
+			String requestedAmount = in.readLine();
+			double requestedAmountValue = Double.parseDouble(requestedAmount);
+
+			if (requestedAmountValue < 100 || requestedAmountValue > 10000) {
+
+				out.println("We do not offer microloans of that size");
+
+				requestMicroloan(in, out);
+
+				return;
+			}
+
+			out.println("What is the total you afford to pay back, interest-free, in 12 months?");
+			String affordAmount = in.readLine();
+			double affordAmountValue = Double.parseDouble(affordAmount);
+
+			if (affordAmountValue >= requestedAmountValue) {
+
+				out.println("Congratulations, your microloan request has been accepted!");
+
+				// Customer can afford loan
+				// TODO: add to customer bank account
+				// TODO: make a note of when the customer needs to repay
+
+			} else {
+
+				out.println("In good conscience we cannot loan you the money for affordability reasons");
+
+				return;
+			}
+
+		} catch (IOException r) {
+
+			out.println(r);
+		}
 	}
 
 }
