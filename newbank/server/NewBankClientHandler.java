@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class NewBankClientHandler extends Thread {
 
@@ -21,14 +22,15 @@ public class NewBankClientHandler extends Thread {
 
 	private void printClientMajorHelpCommands() {
 
-		out.println("\n---------------------------------------------------------");
-		out.println("What do you want to do today?");
-		out.println("Press 1 to list your accounts");
-		out.println("Press 2 to create a new account");
-		out.println("Press 3 to transfer money between your accounts");
-		out.println("Press 4 to send money to another person");
-		out.println("Press 5 to request a microloan");
-		out.println("Press 6 to logout");
+		out.println();
+		out.println(" ╭────────────────────── Main Menu ──────────────────────╮");
+		out.println(" │ What would you like to do today?                      │");
+		out.println(" │ Press 1 to list your accounts                         │");
+		out.println(" │ Press 2 to create a new account                       │");
+		out.println(" │ Press 3 to transfer money between your accounts       │");
+		out.println(" │ Press 4 to send money to another person               │");
+		out.println(" │ Press 5 to logout                                     │");
+		out.println(" ╰───────────────────────────────────────────────────────╯");
 		out.println("\nEnter option: "); // Note use of print to enter command on same line
 
 	}
@@ -94,7 +96,7 @@ public class NewBankClientHandler extends Thread {
 
 						case "1" :
 							// List your accounts
-							out.println("Retrieving accounts...");
+							out.println("Retrieving accounts...\n");
 
 						case "2" :
 							// Create a new account
@@ -121,6 +123,7 @@ public class NewBankClientHandler extends Thread {
 					}
 
 					out.println(response);
+					pauseUI();
 
 				}
 
@@ -143,12 +146,21 @@ public class NewBankClientHandler extends Thread {
 		}
 
 	}
+	
+	private void pauseUI(){
+		out.println("\nPress Enter to continue...");
+		try
+		{
+			in.read();
+		}
+		catch(Exception e)
+		{}
+	}
 
-
-	private void newAccountRegister() {
+	private void newAccountRegister(){
 
 		try {
-			out.println("Please enter a username you would like to use");
+			out.println("Please enter your desired username");
 			String userID = in.readLine();
 
 			//for loop to loop back round if username is take and need to ask again
@@ -170,7 +182,7 @@ public class NewBankClientHandler extends Thread {
 
 					if (password != null) {
 
-						out.println("Password too short, must be more than 7 characters");
+						out.println("Password too short, must be 7  or more characters");
 					}
 
 					out.println("Please enter a valid password containing 7 or more characters");

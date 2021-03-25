@@ -1,8 +1,3 @@
-// NBS group branch test
-
-//3/18/21 push test Nina J. -- to delete later!
-// Hello I'm announcing this is my branch now
-
 package newbank.client;
 
 import java.io.BufferedReader;
@@ -17,7 +12,7 @@ public class ExampleClient extends Thread{
 	private Socket server;
 	private PrintWriter bankServerOut;
 	private BufferedReader userInput;
-	private Thread bankServerResponceThread;
+	private Thread bankServerResponseThread;
 
 	public ExampleClient(String ip, int port) throws UnknownHostException, IOException {
 
@@ -25,7 +20,7 @@ public class ExampleClient extends Thread{
 		userInput = new BufferedReader(new InputStreamReader(System.in));
 		bankServerOut = new PrintWriter(server.getOutputStream(), true);
 
-		bankServerResponceThread = new Thread() {
+		bankServerResponseThread = new Thread() {
 
 			private BufferedReader bankServerIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			public void run() {
@@ -40,7 +35,7 @@ public class ExampleClient extends Thread{
 				}
 			}
 		};
-		bankServerResponceThread.start();
+		bankServerResponseThread.start();
 		// Changed position of printClientWelcomeMessage() to expected UI display order
 		printClientWelcomeMessage();
 	}
@@ -67,10 +62,18 @@ public class ExampleClient extends Thread{
 
 	private void printClientWelcomeMessage() {
 
+		System.out.println(" _____                          ____  ______             _    ");
+		System.out.println("|  __ \\                        / ___| | ___ \\           | |   ");
+		System.out.println("| |  \\/_ __ ___  _   _ _ __   / /___  | |_/ / __ _ _ __ | | __");
+		System.out.println("| | __| '__/ _ \\| | | | '_ \\  | ___ \\ | ___ \\/ _` | '_ \\| |/ /");
+		System.out.println("| |_\\ \\ | | (_) | |_| | |_) | | \\_/ | | |_/ / (_| | | | |   < ");
+		System.out.println(" \\____/_|  \\___/ \\__,_| .__/  \\_____/ \\____/ \\__,_|_| |_|_|\\_\\");
+		System.out.println("                      | |                                     ");
+		System.out.println("                      |_|                                     ");
+		System.out.println(" ╭────────────────────────────────────────────────────────╮");
+		System.out.println(" │ Welcome to the Group 6 Bank - YOUR international bank! │");
+		System.out.println(" ╰────────────────────────────────────────────────────────╯");
 		System.out.println("\n");
-		System.out.println("=========================================================");
-		System.out.println("Welcome to the Group 6 Bank - YOUR international bank!");
-		System.out.println("=========================================================");
-		System.out.println("\n");
+
 	}
 }
