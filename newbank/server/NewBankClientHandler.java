@@ -210,10 +210,11 @@ public class NewBankClientHandler extends Thread {
 
 					if (password != null) {
 
-						out.println("Password too short, must be 7  or more characters");
+						out.println("This password is not secure");
 					}
 
-					out.println("Please enter a valid password containing 7 or more characters");
+					out.println("Please enter a secure password");
+					out.println("The password should be at least 7 characters and include at least one digit, one uppercase, one lowercase, and one of the following special characters: @#$%^&+=!?");
 
 					password = in.readLine();
 
