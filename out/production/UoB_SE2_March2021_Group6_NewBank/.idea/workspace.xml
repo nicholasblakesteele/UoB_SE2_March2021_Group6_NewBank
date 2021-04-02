@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2c1b8f1-b339-4d00-b7f1-68b775d78e9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/newbank/client/ExampleClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/newbank/client/ExampleClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newbank/server/NewBankClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/newbank/server/NewBankClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newbank/server/NewBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/newbank/server/NewBank.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +24,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Application.NewBankServer">
     <configuration name="ExampleClient (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -79,13 +79,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -113,7 +115,14 @@
       <workItem from="1616498408521" duration="227000" />
       <workItem from="1616498761110" duration="15000" />
       <workItem from="1616582518126" duration="27000" />
-      <workItem from="1616582551897" duration="694000" />
+      <workItem from="1616582551897" duration="12509000" />
+      <workItem from="1616597875325" duration="125000" />
+      <workItem from="1616598043284" duration="154000" />
+      <workItem from="1616666953548" duration="230000" />
+      <workItem from="1616667379550" duration="71000" />
+      <workItem from="1617209293995" duration="4042000" />
+      <workItem from="1617216614588" duration="3380000" />
+      <workItem from="1617355095987" duration="528000" />
     </task>
     <servers />
   </component>
@@ -121,22 +130,22 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="292" key="GridCell.Tab.0.bottom" timestamp="1616498310477">
+    <state width="1398" height="82" key="GridCell.Tab.0.bottom" timestamp="1617220360291">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="292" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1616498310477" />
-    <state width="1398" height="292" key="GridCell.Tab.0.center" timestamp="1616498310476">
+    <state width="1398" height="82" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1617220360291" />
+    <state width="1398" height="82" key="GridCell.Tab.0.center" timestamp="1617220360291">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="292" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1616498310476" />
-    <state width="1398" height="292" key="GridCell.Tab.0.left" timestamp="1616498310475">
+    <state width="1398" height="82" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1617220360291" />
+    <state width="1398" height="82" key="GridCell.Tab.0.left" timestamp="1617220360291">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="292" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1616498310475" />
-    <state width="1398" height="292" key="GridCell.Tab.0.right" timestamp="1616498310476">
+    <state width="1398" height="82" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1617220360291" />
+    <state width="1398" height="82" key="GridCell.Tab.0.right" timestamp="1617220360291">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="292" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1616498310476" />
+    <state width="1398" height="82" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1617220360291" />
     <state width="1398" height="292" key="GridCell.Tab.1.bottom" timestamp="1616498310478">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

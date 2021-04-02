@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class NewBank {
 
@@ -62,8 +63,10 @@ public class NewBank {
 		passwords.put(UserId, password);
 	}
 
+	// Function validates password, requires at least 7 characters including: one digit, one uppercase, one lowercase, one special character @#$%^&+=
 	public synchronized boolean checkPassword(String password) {
-		if (password.length() >= 7)
+		boolean valid = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?])(?=\\S+$).{7,}$").matcher(password).matches();
+		if (valid)
 			return true;
 		else {
 			return false;

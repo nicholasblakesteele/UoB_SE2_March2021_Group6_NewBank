@@ -146,7 +146,8 @@ public class NewBankClientHandler extends Thread {
 		}
 
 	}
-	
+
+	// Function to pause the UI after displaying a menu
 	private void pauseUI(){
 		out.println("\nPress Enter to continue...");
 		try
@@ -155,6 +156,35 @@ public class NewBankClientHandler extends Thread {
 		}
 		catch(Exception e)
 		{}
+	}
+
+	// Function to return the initial deposit value entered by the user at registration
+	private int getValue(){
+
+		int value = 0;
+		Boolean correctValue = false;
+
+		// Asking user for deposit, loops until a correct value is entered
+		while (correctValue == false) {
+
+			// User enters an integer value
+			try{
+				String input = in.readLine();
+				value = Integer.parseInt(input);
+			}catch(Exception e){
+				System.out.println("Not an integer");
+			}
+
+			// Denies the value if it is out of limits
+			if (value <= 1 || value >= 1000000) {
+				out.println("Our apologies, the amount entered was not accepted.");
+				out.println("The bank allows deposits between 1 £ and 1'000'000 £, please try again: \n");
+			}
+			else {
+				correctValue = true;
+			}
+		}
+		return value;
 	}
 
 	private void newAccountRegister(){
@@ -172,8 +202,6 @@ public class NewBankClientHandler extends Thread {
 
 			} else {
 
-				//out.println("Please enter a valid password");
-				// String password = in.readLine();
 
 				Boolean passwordPass = false;
 				String password = null;
@@ -182,10 +210,11 @@ public class NewBankClientHandler extends Thread {
 
 					if (password != null) {
 
-						out.println("Password too short, must be 7  or more characters");
+						out.println("This password is not secure");
 					}
 
-					out.println("Please enter a valid password containing 7 or more characters");
+					out.println("Please enter a secure password");
+					out.println("The password should be at least 7 characters and include at least one digit, one uppercase, one lowercase, and one of the following special characters: @#$%^&+=!?");
 
 					password = in.readLine();
 
@@ -197,15 +226,14 @@ public class NewBankClientHandler extends Thread {
 				String accountName = in.readLine();
 
 				out.println("Please enter initial deposit");
-				String DepositValue = in.readLine();
-				double value = Double.parseDouble(DepositValue);
+				int value = getValue();
 
 				Account newA = new Account(accountName, value);
 				bank.addNewCustomer(userID, password, newA);
 
 				// Note currently new Account() will only create an account in memory
 
-				out.println("Customer account and opening balance created. Please login.");
+				out.println("Thank you. Customer account and opening balance created. Please login.");
 
 				// Now offer to login
 
