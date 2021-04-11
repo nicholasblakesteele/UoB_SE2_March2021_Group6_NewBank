@@ -1,10 +1,4 @@
-// NBS branch test
-// NBS branch3 test
-// NBS group test123
-
-//3/18/21 push test Nina J. -- to delete later!
-
-package NewBank.newbank.client;
+package newbank.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,20 +12,22 @@ public class ExampleClient extends Thread{
 	private Socket server;
 	private PrintWriter bankServerOut;
 	private BufferedReader userInput;
-	private Thread bankServerResponceThread;
+	private Thread bankServerResponseThread;
 
 	public ExampleClient(String ip, int port) throws UnknownHostException, IOException {
+
 		server = new Socket(ip,port);
 		userInput = new BufferedReader(new InputStreamReader(System.in));
 		bankServerOut = new PrintWriter(server.getOutputStream(), true);
 
-		bankServerResponceThread = new Thread() {
+		bankServerResponseThread = new Thread() {
+
 			private BufferedReader bankServerIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			public void run() {
 				try {
 					while(true) {
-						String responce = bankServerIn.readLine();
-						System.out.println(responce);
+						String response = bankServerIn.readLine();
+						System.out.println(response);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -39,15 +35,15 @@ public class ExampleClient extends Thread{
 				}
 			}
 		};
-		bankServerResponceThread.start();
+		bankServerResponseThread.start();
+		// Changed position of printClientWelcomeMessage() to expected UI display order
+		printClientWelcomeMessage();
 	}
-
 
 	public void run() {
 
-		System.out.println("ExampleClient: run()");
-
 		while(true) {
+
 			try {
 				while(true) {
 					String command = userInput.readLine();
@@ -62,5 +58,22 @@ public class ExampleClient extends Thread{
 
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
 		new ExampleClient("localhost",14002).start();
+	}
+
+	private void printClientWelcomeMessage() {
+
+		System.out.println(" _____                          ____  ______             _    ");
+		System.out.println("|  __ \\                        / ___| | ___ \\           | |   ");
+		System.out.println("| |  \\/_ __ ___  _   _ _ __   / /___  | |_/ / __ _ _ __ | | __");
+		System.out.println("| | __| '__/ _ \\| | | | '_ \\  | ___ \\ | ___ \\/ _` | '_ \\| |/ /");
+		System.out.println("| |_\\ \\ | | (_) | |_| | |_) | | \\_/ | | |_/ / (_| | | | |   < ");
+		System.out.println(" \\____/_|  \\___/ \\__,_| .__/  \\_____/ \\____/ \\__,_|_| |_|_|\\_\\");
+		System.out.println("                      | |                                     ");
+		System.out.println("                      |_|                                     ");
+		System.out.println(" ╭────────────────────────────────────────────────────────╮");
+		System.out.println(" │ Welcome to the Group 6 Bank - YOUR international bank! │");
+		System.out.println(" ╰────────────────────────────────────────────────────────╯");
+		System.out.println("\n");
+
 	}
 }
