@@ -23,6 +23,7 @@ public class NewBankClientHandler extends Thread {
 	private void printClientMajorHelpCommands() {
 
 		out.println();
+
 		out.println(" ╭────────────────────── Main Menu ──────────────────────-─╮");
 		out.println(" │ What would you like to do today?                                                                             │");
 		out.println(" │ Press 1 to list your accounts                                                                                          │");
@@ -88,9 +89,11 @@ public class NewBankClientHandler extends Thread {
 
 					String request = in.readLine();
 					out.println("\nProcessing request for customer: " + customer.getKey());
+
 					//Commenting out the pauseUI function. It interferes with the main menu (throws an error message)
 					//pauseUI();
 					//String response = bank.processRequest(in, out, customer, request);
+
 
 					// Print status of request
 
@@ -130,7 +133,6 @@ public class NewBankClientHandler extends Thread {
 					//Commenting out the pauseUI function. It interferes with the main menu (throws an error message)
 					//pauseUI();
 
-
 				}
 
 			} else {
@@ -165,10 +167,12 @@ public class NewBankClientHandler extends Thread {
 	}
 
 
+
 	// Function to return the initial deposit value entered by the user at registration
 	private double getValue(){
 
 		double value = 0.0;
+
 		Boolean correctValue = false;
 
 		// Asking user for deposit, loops until a correct value is entered
@@ -177,7 +181,9 @@ public class NewBankClientHandler extends Thread {
 			// User enters an integer value
 			try{
 				String input = in.readLine();
+
 				value = Double.parseDouble(input);
+
 			}catch(Exception e){
 				System.out.println("Not an integer");
 			}
@@ -233,7 +239,9 @@ public class NewBankClientHandler extends Thread {
 				String accountName = in.readLine();
 
 				out.println("Please enter initial deposit");
+
 				double value = getValue();
+
 
 				Account newA = new Account(accountName, value);
 				bank.addNewCustomer(userID, password, newA);

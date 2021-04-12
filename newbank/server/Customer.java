@@ -19,6 +19,7 @@ public class Customer {
 			//each string item prints on a new line
 			spaceCount = 52 - a.toString().length();
 			s += " │ " + a.toString() + " £" + space.repeat(spaceCount) + "│\n";
+
 		}
 		s += " ╰───────────────────────────────────────────────────────╯";
 		return s;

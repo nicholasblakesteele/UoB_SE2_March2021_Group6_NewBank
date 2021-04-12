@@ -74,6 +74,7 @@ public class NewBank {
 	}
 
 
+
 	//Not yet implemented!!
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(customers.containsKey(userName)) {
@@ -97,6 +98,7 @@ public class NewBank {
 					return showMyAccounts(customer);
 
 				case "2" :
+
 					// Create a new saving or checking account
 					createNewAccount(in, out, customer);
 					//Always display all account summary after creating a new account
@@ -122,6 +124,7 @@ public class NewBank {
 
 				default :
 					return "Invalid option. Please try again.";
+
 			}
 		}
 
@@ -239,7 +242,6 @@ public class NewBank {
 		balanceTo +=  transferAmount;
 		client.updateBalance(transferFrom, balanceFrom);
 		client.updateBalance(transferTo, balanceTo);
-
 	}
 
 
