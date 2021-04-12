@@ -14,4 +14,16 @@ public class Account {
 		return (accountName + ": " + openingBalance);
 	}
 
+	public double getBalance(){
+		return openingBalance;
+	}
+
+	public String getAccountName(){
+		return accountName;
+	}
+
+	public void setBalance( double num){
+		openingBalance = num;
+	}
+
 }

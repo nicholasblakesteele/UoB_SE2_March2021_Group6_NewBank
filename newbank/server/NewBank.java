@@ -73,12 +73,13 @@ public class NewBank {
 		}
 	}
 
-	//Rebecca's card - to be implemented. For now it does not check for Login.
+
+
+	//Not yet implemented!!
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(customers.containsKey(userName)) {
 			return new CustomerID(userName);
 		}
-		//return null; ORIGINAL CODE TO UN-COMMENT LATER
 		return new CustomerID(userName);
 	}
 
@@ -97,12 +98,16 @@ public class NewBank {
 					return showMyAccounts(customer);
 
 				case "2" :
-					// Create a new account
-					return "CreateNewAccount Feature Incomplete";
+
+					// Create a new saving or checking account
+					createNewAccount(in, out, customer);
+					//Always display all account summary after creating a new account
+					return showMyAccounts(customer);
 
 				case "3" :
 					// Transfer money between your accounts
-					return "TransferMoney Feature Incomplete";
+					transBetweenAccount(in,out,customer);
+					return showMyAccounts(customer);
 
 				case "4" :
 					// Send money to another person
@@ -119,10 +124,124 @@ public class NewBank {
 
 				default :
 					return "Invalid option. Please try again.";
+
 			}
 		}
 
-		return "Account does not exist"; //if getKey() fails ?
+		return "Account does not exist";
+	}
+
+
+	//Create a new account. NOTE: Currently it does not check if an account with the same name exists!
+	private void createNewAccount(BufferedReader in, PrintWriter out, CustomerID customer) {
+		Customer client = customers.get(customer.getKey());
+		out.println("Enter your new account name, Savings or Checking:  ");
+		String newAccountName = null;
+		try {
+			newAccountName = in.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		//Ask for a deposit amount
+		double value = 0.0;
+		while(true) {
+			out.println("Please enter initial deposit:  ");
+			String DepositValue = null;
+			try {
+				DepositValue = in.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//guard against bad inputs!
+			try {
+				value = Double.parseDouble(DepositValue);
+				if(value > 0){
+					break;
+				}
+			} catch (NumberFormatException e) {
+				out.println("Please enter only integers greater than 0");
+			}
+		}
+		//add the new account and initial deposit value  to customer
+		client.addAccount(new Account(newAccountName, value));
+	}
+
+	//Transfer money between accounts.
+	//TO DO: Functions can be broken down into smaller functions.
+	private void transBetweenAccount(BufferedReader in, PrintWriter out, CustomerID customer){
+
+		Customer client = customers.get(customer.getKey());
+		//Retrieve transfer from info
+		String transferFrom = "";
+		String transferTo = "";
+		while(true) {
+			out.println("Where do you want to transfer from?:  ");
+			try {
+				transferFrom = in.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (transferFrom.equalsIgnoreCase("savings") || transferFrom.equalsIgnoreCase("checking")) {
+				break;
+			}
+			else if(!client.accountExists(transferFrom)){
+				out.println("You do not have a " + transferFrom + " account. Please try again.");
+			}
+			else if(!client.accountExists(transferTo)){
+				out.println("You do not have a " + transferTo+ " account. Please try again.");
+			}
+			else{
+				out.println("An error has occurred. Returning to the main menu.");
+				return;
+			}
+		}
+
+		//Determine the transferTo account
+		if(transferFrom.equalsIgnoreCase("savings")){
+			transferTo = "Checking";}
+		else{
+				transferTo = "Savings";}
+
+		//Retrieve the customer's current transferFrom balance
+		double balanceFrom = client.showBalance(transferFrom);
+		double balanceTo = client.showBalance(transferTo);
+
+		//Amount to transfer between accounts
+		//Check to see if there are sufficient funds in the transferFrom account
+		//TO DO: Should add other options to start over, return to the main menu, etc.
+		String value = null;
+		double transferAmount = 0.0;
+		while(true) {
+			out.println("How much would you like to transfer?:  ");
+			try {
+				value = in.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//Guard against bad inputs!
+			try {
+				transferAmount = Double.parseDouble(value);
+				if (transferAmount > 0 && transferAmount <= balanceFrom) {
+					break;
+				} else if(balanceFrom == 0){
+					out.println("You do not have any money in your " + transferFrom +  " account. Returning to the Main Menu.");
+					return;
+				} else if (transferAmount > balanceFrom) {
+					out.println("Insufficient funding. Please enter the amount again.");
+				} else{
+					out.println("Please enter an amount greater than 0");
+				}
+			} catch (NumberFormatException e) {
+				out.println("Please enter only integers greater than 0");
+			}
+		}
+
+		//Transfer (Also TO DO: Create another method to break down the process!
+		balanceFrom -=  transferAmount;
+		balanceTo +=  transferAmount;
+		client.updateBalance(transferFrom, balanceFrom);
+		client.updateBalance(transferTo, balanceTo);
 	}
 
 

@@ -23,13 +23,15 @@ public class NewBankClientHandler extends Thread {
 	private void printClientMajorHelpCommands() {
 
 		out.println();
-		out.println(" ╭────────────────────── Main Menu ──────────────────────╮");
-		out.println(" │ What would you like to do today?                      │");
-		out.println(" │ Press 1 to list your accounts                         │");
-		out.println(" │ Press 2 to create a new account                       │");
-		out.println(" │ Press 3 to transfer money between your accounts       │");
-		out.println(" │ Press 4 to send money to another person               │");
-		out.println(" │ Press 5 to logout                                     │");
+
+		out.println(" ╭────────────────────── Main Menu ──────────────────────-─╮");
+		out.println(" │ What would you like to do today?                                                                             │");
+		out.println(" │ Press 1 to list your accounts                                                                                          │");
+		out.println(" │ Press 2 to create a new account                                                                                  │");
+		out.println(" │ Press 3 to transfer money between your accounts                                             │");
+		out.println(" │ Press 4 to send money to another person                                                              │");
+		out.println(" │ Press 5 to apply for a Microloan                                                                                  │");
+		out.println(" │ Press 6 to log out                                                                                                               │");
 		out.println(" ╰───────────────────────────────────────────────────────╯");
 		out.println("\nEnter option: "); // Note use of print to enter command on same line
 
@@ -88,7 +90,10 @@ public class NewBankClientHandler extends Thread {
 					String request = in.readLine();
 					out.println("\nProcessing request for customer: " + customer.getKey());
 
-					String response = bank.processRequest(in, out, customer, request);
+					//Commenting out the pauseUI function. It interferes with the main menu (throws an error message)
+					//pauseUI();
+					//String response = bank.processRequest(in, out, customer, request);
+
 
 					// Print status of request
 
@@ -122,8 +127,11 @@ public class NewBankClientHandler extends Thread {
 							// Print nothing
 					}
 
+					String response = bank.processRequest(in, out, customer, request);
 					out.println(response);
-					pauseUI();
+
+					//Commenting out the pauseUI function. It interferes with the main menu (throws an error message)
+					//pauseUI();
 
 				}
 
@@ -158,10 +166,13 @@ public class NewBankClientHandler extends Thread {
 		{}
 	}
 
-	// Function to return the initial deposit value entered by the user at registration
-	private int getValue(){
 
-		int value = 0;
+
+	// Function to return the initial deposit value entered by the user at registration
+	private double getValue(){
+
+		double value = 0.0;
+
 		Boolean correctValue = false;
 
 		// Asking user for deposit, loops until a correct value is entered
@@ -170,7 +181,9 @@ public class NewBankClientHandler extends Thread {
 			// User enters an integer value
 			try{
 				String input = in.readLine();
-				value = Integer.parseInt(input);
+
+				value = Double.parseDouble(input);
+
 			}catch(Exception e){
 				System.out.println("Not an integer");
 			}
@@ -226,7 +239,9 @@ public class NewBankClientHandler extends Thread {
 				String accountName = in.readLine();
 
 				out.println("Please enter initial deposit");
-				int value = getValue();
+
+				double value = getValue();
+
 
 				Account newA = new Account(accountName, value);
 				bank.addNewCustomer(userID, password, newA);
